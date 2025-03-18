@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap');
+
+body {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(45deg, #0f0c29, #302b63, #2c0153, #9e0008, #00302c, #379968);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Píxeles en movimiento */
+.pixels {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.pixel {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+    animation: pixelMove linear infinite;
+}
+
+@keyframes pixelMove {
+    from { transform: translate(0, 0); opacity: 1; }
+    to { transform: translate(calc(-50vw + 100vw * random()), calc(-50vh + 100vh * random())); opacity: 0; }
+}
+
+/* ESTILO PARA VENTANA EMERGENTE DE PUNTOS */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.modal-content {
+    background: #222;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    width: 300px;
+}
+
+.modal-content h2 {
+    font-family: 'Press Start 2P', cursive;
+    color: #0ff;
+    margin-bottom: 10px;
+}
+
+button {
+    background: #0ff;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00c3ff;
+}
+/* ------------------------------------------------------- */
+
+.header {
+    font-size: 40px;
+    color: #0ff;
+    text-shadow: 0 0 15px #0ff, 0 0 25px #00f, 0 0 50px #00f;
+    text-align: center;
+    padding: 40px 0;
+    margin-top: -10px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.score-counter {
+    position: absolute;
+    top: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    background: yellow;
+    padding: 15px 30px;
+    border-radius: 15px;
+    color: black;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.9);
+    text-align: center;
+    z-index: 3;
+}
+
+.game-container {
+    width: 75%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid rgba(0, 255, 255, 0.7);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 🔹 Fondo con efecto difuminado */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 🔹 Contenedor principal de la modal */
+.modal-content {
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    padding: 30px;
+    width: 450px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+    border: 2px solid cyan;
+}
+
+/* 🔹 Animación de entrada suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🔹 Botón de cerrar */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.modal-close:hover {
+    color: cyan;
+    transform: rotate(180deg);
+}
+
+/* 🔹 Título con efecto neon */
+.modal-title {
+    font-size: 36px;
+    color: cyan;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px cyan, 0px 0px 20px cyan;
+    margin-bottom: 15px;
+}
+
+/* 🔹 Texto descriptivo */
+.modal-text {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* 🔹 Input estilizado */
+.modal input {
+    width: 90%;
+    padding: 12px;
+    border: 2px solid cyan;
+    border-radius: 6px;
+    font-size: 18px;
+    text-align: center;
+    background: #000;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* 🔹 Efecto al hacer foco en el input */
+.modal input:focus {
+    border-color: #0ff;
+    box-shadow: 0 0 12px cyan, 0 0 20px cyan;
+    transform: scale(1.05);
+}
+
+/* 🔹 Botón con efecto 3D */
+.modal-button {
+    background: linear-gradient(145deg, #0ff, #00c3c3);
+    color: black;
+    font-size: 22px;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    text-transform: uppercase;
+    box-shadow: 0 0 12px cyan;
+    font-family: 'Arial', sans-serif;
+    margin-top: 15px;
+}
+
+/* 🔹 Efecto al pasar el mouse */
+.modal-button:hover {
+    background: #0ff;
+    box-shadow: 0px 0px 15px cyan, 0px 0px 25px cyan;
+    transform: scale(1.1);
+}
+/* 🔹 Estilizando el campo de nombre (playername) */
+#playername {
+    width: 90%;
+    padding: 12px;
+    border: 2px solid cyan;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    background: #111;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    margin-top: 10px;
+}
+
+/* 🔹 Efecto al hacer foco en el input */
+#playername:focus {
+    border-color: #0ff;
+    box-shadow: 0 0 15px cyan, 0 0 25px cyan;
+    transform: scale(1.05);
+    background: black;
+}
+
+/* 🔹 Placeholder con efecto */
+#playername::placeholder {
+    color: rgba(0, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* 🔹 Input deshabilitado */
+#playername:disabled {
+    background: #222;
+    color: gray;
+    border-color: #444;
+    box-shadow: none;
+}

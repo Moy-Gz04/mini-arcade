@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta de Apuestas</title>
+    <link rel="stylesheet" href="css/stylegame4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ruleta de Apuestas</h1>
+        <div class="game-wrapper">
+            <canvas id="rouletteCanvas" width="500" height="500"></canvas>
+            <div class="controls">
+                <p>Monedas disponibles: <span id="coins">100</span></p>
+                <input type="number" id="betAmount" placeholder="Cantidad a apostar" min="1">
+                <button id="spinButton">Girar Ruleta</button>
+                <div class="history">
+                    <p class="history-title">Historial de Giros</p>
+                    <div id="historyList" class="history-list"></div>
+                </div>
+            </div>
+            <button id="exitButton"> Salir </button>
+            <!-- Notificación para mensajes de juego -->
+            <div id="notification" class="notification"></div>
+
+        </div>
+        <p id="result"></p>
+    </div>
+    <script type="module" src="./js/jsgame4.js"></script>
+    <script type="module" src="./js/firebaseConfig.js"></script>
+
+
+</body>
+</html>

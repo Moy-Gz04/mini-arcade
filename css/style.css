@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap');
+
+body {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background: url('../img/fondo3.webp') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    height: 25px;
+    color: #0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    text-shadow: 0 0 15px #0ff, 0 0 25px #00f, 0 0 50px #00f;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+/* Contador de monedas */
+.coin-counter {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.8);
+    background: transparent;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: -60px;
+    margin-left: 1300px;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 88vh;
+}
+
+.game-container {
+    width: 55%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 3px solid rgba(0, 255, 255, 0.7);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 10px;
+    margin-left: 220px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 15px;
+    border: 2px solid cyan;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+.sidebar {
+    width: 15%;
+    height: 40%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+    border: 2px solid cyan;
+    border-radius: 15px;
+    margin-top: 13px;
+    margin-right: 10px;
+    padding: 15px;
+    position: relative;
+}
+
+.sidebar-card {
+    width: 90%;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid cyan;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 10px cyan;
+}
+
+.sidebar h1 {
+    color: cyan;
+    text-shadow: 0 0 15px cyan, 0 0 25px #00ffff;
+    font-size: 22px;
+    text-align: center;
+    height: 30px;
+}
+
+.lock-icon {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.sidebar-button {
+    width: 80%;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.sidebar-button::before {
+    content: '🔒';
+    position: absolute;
+    top: -25px;
+    left: 0%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.sidebar-button:hover {
+    background-color: #555;
+    color: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+}
+
+#shopButton {
+    background: #f39c12;
+}
+
+#skinsButton {
+    background: #3498db;
+}
+
+.transition-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    display: none;
+    text-shadow: 0 0 10px cyan;
+}

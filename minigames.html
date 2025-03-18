@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Juegos</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .header {
+            width: 100%;
+            height: 15vh;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .game-container {
+            display: flex;
+            width: 100%;
+            height: 85vh;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            width: 80%;
+            height: 80%;
+            border: 2px solid black;
+            background-color: lightgray;
+        }
+        .coin-counter {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            background: yellow;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Mini Juegos - Gana Monedas</div>
+    <div class="coin-counter">Monedas: <span id="coinCount">0</span></div>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const coinCounter = document.getElementById("coinCount");
+        let coins = 0;
+        
+        canvas.width = canvas.parentElement.clientWidth * 0.8;
+        canvas.height = canvas.parentElement.clientHeight * 0.8;
+        
+        let player = { x: 50, y: 50, width: 30, height: 30, speed: 5 };
+        let coin = { x: Math.random() * (canvas.width - 20), y: Math.random() * (canvas.height - 20), size: 15 };
+        
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar moneda
+            ctx.fillStyle = "gold";
+            ctx.beginPath();
+            ctx.arc(coin.x, coin.y, coin.size, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Dibujar personaje
+            ctx.fillStyle = "blue";
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+        
+        function checkCollision() {
+            let dx = player.x + player.width / 2 - coin.x;
+            let dy = player.y + player.height / 2 - coin.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < coin.size + player.width / 2) {
+                coins++;
+                coinCounter.innerText = coins;
+                coin.x = Math.random() * (canvas.width - 20);
+                coin.y = Math.random() * (canvas.height - 20);
+            }
+        }
+        
+        function handleKeyDown(event) {
+            switch (event.key) {
+                case "ArrowUp":
+                    player.y -= player.speed;
+                    break;
+                case "ArrowDown":
+                    player.y += player.speed;
+                    break;
+                case "ArrowLeft":
+                    player.x -= player.speed;
+                    break;
+                case "ArrowRight":
+                    player.x += player.speed;
+                    break;
+            }
+            checkCollision();
+            drawGame();
+        }
+        
+        document.addEventListener("keydown", handleKeyDown);
+        drawGame();
+    </script>
+</body>
+</html>

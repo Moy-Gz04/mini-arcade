@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Clicker - Mapa</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">Arcade Mini Games </div>
+    <div class="coin-counter"> 🪙 <span id="coinDisplay">0</span></div>
+    <div class="main-container">
+        <div class="game-container">
+            <canvas id="gameCanvas"></canvas>
+            <div id="transitionMessage" class="transition-message"></div>
+        </div>
+        <div class="sidebar">
+            <h1>Proximamente</h1>
+            <button class="sidebar-button" id="shopButton">🛒 Tienda</button>
+            <button class="sidebar-button" id="skinsButton"> Mis Skins</button>
+        </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/firebaseConfig.js"></script>
+</body>
+</html>

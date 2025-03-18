@@ -1,0 +1,130 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #111;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Título */
+.title {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de las cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    width: 80%;
+}
+
+/* Estilos para cada card */
+.card {
+    flex: 1;
+    max-width: 30%;
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Estilos para la tabla de ranking dentro de las cards */
+.card table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card th, .card td {
+    padding: 10px;
+    border-bottom: 1px solid #555;
+}
+
+.card th {
+    background: #444;
+    color: cyan;
+}
+
+.card td {
+    background: #555;
+}
+
+/* Contenedor del botón */
+.button-container {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* 🎨 Estilos del botón con efectos */
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00f7ff, #0ff);
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* 💡 Efecto de iluminación y cambio de color */
+button:hover {
+    background: linear-gradient(90deg, #0ff, #00f7ff);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+}
+
+/* 🌊 Efecto de onda al hacer clic */
+button:active {
+    transform: scale(0.95);
+}
+
+/* ✨ Brillo animado */
+button::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.6) 10%, rgba(0, 255, 255, 0) 50%);
+    transform: rotate(25deg);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+button:hover::before {
+    opacity: 1;
+}

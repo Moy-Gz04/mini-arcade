@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esquiva las Mancuernas</title>
+    <link rel="stylesheet" href="css/stylegame2.css">
+</head>
+<body>
+
+<!-- VENTANA EMERGENTE DE PUNTOS -->  
+<div id="scoreModal" class="modal">
+    <div class="modal-content">
+        <h2> Game Over </h2>
+        <p>Puntuación Total: <span id="finalScore">0</span></p>
+        <p>Monedas 🪙 + <span id="finalCoins">0</span></p>
+        <button onclick="closeScoreModal()">Aceptar</button>
+    </div>
+</div>
+<!--------------------------------> 
+    <div class="overlay"></div>
+    <div class="header">Flapy birth</div>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="countdown" class="countdown"></div>
+    </div>
+    <script>
+        // Generar píxeles aleatorios en el fondo desde diferentes direcciones
+        function createPixels() {
+            const container = document.createElement('div');
+            container.classList.add('pixels');
+            document.body.appendChild(container);
+            
+            for (let i = 0; i < 100; i++) {
+                let pixel = document.createElement('div');
+                pixel.classList.add('pixel');
+                
+                // Posición aleatoria en toda la pantalla
+                pixel.style.left = Math.random() * 100 + 'vw';
+                pixel.style.top = Math.random() * 100 + 'vh';
+                
+                pixel.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(pixel);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', createPixels);
+        
+        </script>
+        
+    <script type="module" src="./js/jsgame2.js"></script>
+    <script type="module" src="./js/firebaseConfig.js"></script>
+    <script type="module" src="./js/firebaseConfig4.js"></script>
+</body>
+</html>

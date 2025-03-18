@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap');
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    background: url('../img/fondoruleta.webp') no-repeat center center fixed;
+    background-size: cover;
+    animation: gradientMove 10s infinite linear;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Panel de la ruleta y controles */
+.game-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background: rgba(10, 10, 10, 0.8); /* Fondo oscuro para mejor contraste */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(255, 100, 0, 0.8), 0px 0px 30px rgba(255, 200, 0, 0.8);
+}
+
+/* Estilos de la ruleta */
+canvas {
+    border: 5px solid #ffcc00;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(255, 165, 0, 0.7), 0px 0px 30px rgba(255, 50, 0, 0.8);
+    margin-bottom: 20px;
+    border-top: -20px;
+}
+
+h1{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 40px;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #00f, 0 0 40px #00f;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro para mejorar visibilidad */
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+/* Controles de apuesta */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(20, 20, 20, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(255, 165, 0, 0.7), 0px 0px 20px rgba(255, 0, 0, 0.7);
+    width: 280px;
+    color: #ffcc00;
+}
+
+.controls p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
+}
+
+input {
+    padding: 12px;
+    background-color: black;
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    border: 2px solid #ffcc00;
+    text-align: center;
+    font-size: 14px;
+    width: 80%;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 8px rgba(255, 165, 0, 0.7);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: #ff3300;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 0px 0px 15px rgba(255, 50, 0, 0.8);
+    transition: 0.3s;
+    width: 70%;
+}
+
+button:hover {
+    background-color: #ff6600;
+    box-shadow: 0px 0px 20px rgba(255, 100, 0, 1);
+}
+
+button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Historial */
+.history {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 165, 0, 0.5);
+    width: 90%;
+    height: 250px;
+    text-align: center;
+}
+
+.history-title {
+    font-size: 16px;
+    color: #ffcc00;
+    text-shadow: 0px 0px 8px rgba(255, 200, 0, 1);
+    margin-bottom: 10px;
+}
+
+.history-list {
+    font-size: 14px;
+    color: white;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 5px;
+    height: 200px;
+}
+
+#historyList{
+    height: 200px;
+}
+
+/* Ajustes extra */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    background: transparent;
+    box-shadow: none;
+}
+
+canvas {
+    border: 5px solid #ffcc00;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(255, 165, 0, 0.7), 0px 0px 30px rgba(255, 50, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    text-shadow: 0px 0px 10px rgba(255, 165, 0, 0.8);
+    margin-bottom: 15px;
+}
+
+/* Estilos para la notificación de mensajes */
+.notification {
+    position: fixed;
+    top: 665px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    display: none;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔴 Rojo - Mensajes de error */
+.notification.error {
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: 2px solid darkred;
+}
+
+/* 🟡 Amarillo - Mensajes de información */
+.notification.info {
+    background-color: rgba(255, 215, 0, 0.9);
+    color: black;
+    border: 2px solid goldenrod;
+}
+
+/* 🟢 Verde - Mensajes de éxito */
+.notification.success {
+    background-color: rgba(0, 200, 0, 0.8);
+    color: white;
+    border: 2px solid darkgreen;
+}
+
+/* 🔥 Botón de Salida con Animaciones y Estilo Futurista */
+#exitButton {
+    background: linear-gradient(45deg, #037005, #4cff61);
+    color: white;
+    border: 2px solid #fff;
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif; /* ✅ Usa la misma tipografía del juego */
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(71, 249, 255, 0.8);
+    text-align: center;
+    width: 100px;
+    margin-top: 550px;
+    margin-left: -151px;
+}
+
+/* 🔥 Efecto Brillo en el Hover */
+#exitButton:hover {
+    background: linear-gradient(45deg, #4ceaff, #1a6eff);
+    box-shadow: 0 0 25px rgba(255, 71, 71, 1);
+    transform: scale(1.05);
+}
+
+/* 🔥 Animación de Luz en Hover */
+#exitButton::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 000%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 50%);
+    transition: all 0.5s ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+/* 🔥 Cuando el usuario pasa el mouse */
+#exitButton:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+}
+
+/* 🔥 Agregar efecto de vibración en clic */
+#exitButton:active {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* 🔥 Definición de la Animación Shake */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}

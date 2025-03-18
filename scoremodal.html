@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .modal {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            width: 300px;
+        }
+        .modal h2 {
+            font-family: 'Press Start 2P', cursive;
+            color: #0ff;
+            margin-bottom: 10px;
+        }
+        .modal p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        button {
+            background: #0ff;
+            color: black;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+        }
+        button:hover {
+            background: #00c3ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <h2> Resultados </h2>
+        <p>Puntuación Total: <span id="finalScore">0</span></p>
+        <p>Monedas Obtenidas: <span id="finalCoins">0</span></p>
+        <button onclick="closeScoreModal()">Aceptar</button>
+    </div>
+
+    <script>
+        function openScoreModal(score, coins) {
+            document.getElementById('finalScore').innerText = score;
+            document.getElementById('finalCoins').innerText = coins;
+        }
+    
+        function closeScoreModal() {
+            window.close();
+        }
+    
+        // Escuchar mensajes desde otros juegos
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.score !== undefined && event.data.coins !== undefined) {
+                openScoreModal(event.data.score, event.data.coins);
+            }
+        });
+    
+        // Obtener parámetros de la URL para mostrar datos dinámicos si se abre como ventana
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get('score') || 0;
+        const coins = urlParams.get('coins') || 0;
+        openScoreModal(score, coins);
+    
+        // Función para abrir la ventana modal desde un juego
+        function sendScoreToModal(score, coins) {
+            const modalWindow = window.open('score_modal.html', '_blank', 'width=400,height=300');
+            setTimeout(() => {
+                modalWindow.postMessage({ score: score, coins: coins }, '*');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
