@@ -148,7 +148,6 @@ window.onload = function() {
     });
 };
 
-// Función para alternar la visibilidad de las tarjetas de reglas
 function toggleRules(rulesId) {
     let card = document.getElementById(rulesId);
 
@@ -157,17 +156,18 @@ function toggleRules(rulesId) {
         return;
     }
 
-    // Alternar visibilidad de la tarjeta
-    let isVisible = card.classList.contains("active");
+    // Si la tarjeta está activa, la ocultamos
+    if (card.classList.contains("active")) {
+        card.classList.remove("active");
+    } else {
+        // Ocultar todas las tarjetas antes de abrir una nueva
+        document.querySelectorAll(".rules-card").forEach(card => card.classList.remove("active"));
 
-    // Ocultar todas las tarjetas antes de abrir la nueva
-    document.querySelectorAll(".rules-card").forEach(card => card.classList.remove("active"));
-
-    // Mostrar solo si no estaba visible antes
-    if (!isVisible) {
+        // Mostrar la tarjeta seleccionada
         card.classList.add("active");
     }
 }
+
 
 // Hacer que la función sea accesible globalmente
 window.toggleRules = toggleRules;
@@ -321,13 +321,29 @@ document.addEventListener("keydown", (event) => {
     drawGame();
 });
 
+
+// 🔹 Bloquear acceso en dispositivos móviles
+function bloquearMovil() {
+    if (window.innerWidth < 668) {  // 📌 Detecta pantallas menores a 768px (móviles)
+        document.getElementById("mobile-block").style.display = "flex";
+    }
+}
+
 // 📌 Ejecutar la función al cargar la página
 document.addEventListener("DOMContentLoaded", bloquearMovil);
 
 
-// 📌 Función para cerrar el modal manualmente
 function closeInstructions() {
-    document.getElementById("instructionsModal").style.display = "none";
+    let modal = document.getElementById("instructionsModal");
+    
+    if (modal) {
+        modal.style.display = "none"; // Ocultar
+        modal.style.visibility = "hidden"; // Asegurar que desaparezca
+        modal.style.opacity = "0"; // Animación suave si aplica
+        modal.style.pointerEvents = "none"; // No interactuable
+    } else {
+        console.warn("⚠️ No se encontró el modal con ID 'instructionsModal'");
+    }
 }
 
 // Hacer accesible la función globalmente
