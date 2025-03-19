@@ -374,6 +374,179 @@ canvas {
     left: 10px; /* Se mueve ligeramente a la izquierda, pero sigue en pantalla */
 }
 
+/* 🔹 Contenedor de la Sidebar (Próximamente) */
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* 🔥 CENTRA TODO HORIZONTALMENTE */
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+/* 🔹 Contenedor de la Scoreboard (Récord de Puntajes) */
+.scoreboard-container {
+    position: absolute;
+    top: 45%; /* 🔥 Ajuste para que no se encimen */
+    right: 2%;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🔹 Secciones individuales con bordes iluminados */
+.sidebar-section, .scoreboard {
+    background: rgba(0, 0, 0, 0.897);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    width: 225px;
+    height: 100px;
+    margin-top: 290px;
+    margin-left: -269px;
+}
+
+/* 🔹 Títulos */
+.sidebar h1, .scoreboard h1 {
+    font-size: 20px;
+    color: cyan;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 1);
+}
+
+/* 🔹 Botones */
+/* 🔹 Botones - Sidebar y Scoreboard */
+.sidebar-button, .scoreboard-button {
+    background: linear-gradient(to right, #ff8c00, #ff2e00);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Press Start 2P', sans-serif; /* 🔥 MISMA FUENTE QUE LOS OTROS BOTONES */
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 8px 0;
+    margin-left: 10px;
+}
+
+/* 🔹 Efecto Hover */
+.sidebar-button:hover, .scoreboard-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+}
+
+/* 🔹 Contenedor para resaltar las monedas */
+.coin-container {
+    position: absolute;
+    top: 100px;
+    right: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+    padding: 8px 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); /* Brillo amarillo */
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border: 2px solid rgba(255, 255, 0, 0.9);
+}
+
+/* 🔹 Ícono de moneda */
+.coin-icon {
+    font-size: 24px;
+    margin-right: 8px;
+    animation: coinGlow 1s infinite alternate;
+}
+
+/* 🔹 Animación para brillo de la moneda */
+@keyframes coinGlow {
+    0% { transform: scale(1); text-shadow: 0 0 5px rgba(255, 255, 0, 0.7); }
+    100% { transform: scale(1.2); text-shadow: 0 0 10px rgba(255, 255, 0, 1); }
+}
+
+/* 🔹 Contenedor del título */
+.header {
+    position: relative;
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    font-family: 'Press Start 2P', cursive; /* Estilo retro */
+    color: #00ffff;
+    text-shadow: 
+        -3px -3px 0 #000,  
+         3px -3px 0 #000,  
+        -3px  3px 0 #000,  
+         3px  3px 0 #000,  
+         0px  0px 10px #00ffff,  
+         0px  0px 20px #00cccc,  
+         0px  0px 30px #009999; 
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro sutil */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    width: fit-content;
+    margin: 20px auto;
+    animation: glowAnimation 1.5s infinite alternate;
+}
+
+/* 🔹 Efecto de animación en el título */
+@keyframes glowAnimation {
+    0% { text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000, 0px 0px 10px #00ffff, 0px 0px 20px #00cccc, 0px 0px 30px #009999; }
+    100% { text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000, 0px 0px 15px #00ffff, 0px 0px 25px #00cccc, 0px 0px 35px #009999; }
+}
+
+/* 🔹 Efecto de parpadeo en las letras */
+.title-glow {
+    animation: flicker 2s infinite alternate;
+}
+
+/* 🔹 Simulación de fallo en un letrero de neón */
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* 🔹 Estilos para el Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro translúcido */
+    color: #00ffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    font-family: 'Press Start 2P', cursive; /* Fuente retro */
+}
+
+/* 🔹 Efecto de brillo en el texto */
+.footer p {
+    margin: 0;
+    animation: flicker 2s infinite alternate;
+}
+
+/* 🔹 Simulación de fallo en neón */
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+
 
 
 

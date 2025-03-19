@@ -133,7 +133,7 @@ window.onload = function() {
     rulesButtons.forEach((btn, index) => {
         const portal = doors[index];
         btn.style.position = "absolute";
-        btn.style.top = `${canvasRect.top + (canvasRect.height * portal.y) - 180}px`; // Ajuste fino hacia arriba
+        btn.style.top = `${canvasRect.top + (canvasRect.height * portal.y) - 150}px`; // Ajuste fino hacia arriba
         btn.style.left = `${canvasRect.left + (canvasRect.width * portal.x) - 195}px`; // Ajuste fino al centro
         btn.style.zIndex = "9999"; // Asegura que estén sobre el canvas
     });

@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">Arcade Mini Games </div>
-    <div class="coin-counter"> 🪙 <span id="coinDisplay">0</span></div>
+    <div class="header">
+        <span class="title-glow">MINI ARCADE</span>
+    </div>
+    
+    <div class="coin-container">
+        <div class="coin-icon">🪙</div>
+        <span id="coinDisplay">0</span>
+    </div>
+    
     <div class="main-container">
         <div class="game-container">
             <canvas id="gameCanvas"></canvas>
@@ -112,10 +119,18 @@
             <button class="sidebar-button" id="shopButton">🛒 Tienda</button>
             <button class="sidebar-button" id="skinsButton"> Mis Skins</button>
         </div>
+        <div class="scoreboard">
+            <h1>Récord de Puntajes</h1>
+            <button class="scoreboard-button" id="scoreboardButton">📊 Ver</button>
+        </div>
+        
+        
     </div>
 
+    <footer class="footer">
+        <p>© 2025 MINI ARCADE | Todos los derechos reservados | Moisés Gómez</p>
+    </footer>
     
-
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/firebaseConfig.js"></script>
 </body>
