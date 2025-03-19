@@ -43,38 +43,138 @@ let player = { x: canvas.width / 2 - 20, y: canvas.height - 100, width: 40, heig
 // Parámetros de los portales
 const doorWidth = 150;
 const doorHeight = 150;
-const doorSpacing = 100;
+const doorSpacing = 50;
 const startX = (canvas.width - (doorWidth * 4 + doorSpacing * 3)) / 2;
 
-let doors = [
-    { x: startX, y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game1" },
-    { x: startX + (doorWidth + doorSpacing), y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game2" },
-    { x: startX + (doorWidth + doorSpacing) * 2, y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game3" },
-    { x: startX + (doorWidth + doorSpacing) * 3, y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game4" }
-];
+// Cargar imágenes de portales
+const portalImages = ["img/mac1.png", "img/mac2.png", "img/mac3.png", "img/mac4.png"].map(src => {
+    const img = new Image();
+    img.src = src;
+    return img;
+});
 
+// Lista de partículas
+let particles = [];
+
+// Función para generar partículas en los portales
+function createParticles() {
+    doors.forEach((door) => {
+        for (let i = 0; i < 8; i++) { // Aumentamos la cantidad de partículas
+            particles.push({
+                x: door.x + door.width / 2, // Aparecen en el centro horizontal del portal
+                y: door.y + door.height / 1.2, // Más bajo para que salgan desde atrás
+                size: Math.random() * 3 + 1, // Tamaño entre 1 y 4 píxeles
+                speedX: (Math.random() - 0.5) * 3, // Movimiento aleatorio en X
+                speedY: (Math.random() - 0.5) * 3, // Movimiento aleatorio en Y
+                alpha: 1 // Opacidad inicial
+            });
+        }
+    });
+}
+
+// Función para actualizar partículas
+function updateParticles() {
+    for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.alpha -= 0.02; // Hacer que desaparezcan gradualmente
+
+        if (p.alpha <= 0) {
+            particles.splice(i, 1); // Eliminar partículas invisibles
+        }
+    }
+}
+
+// Función para dibujar partículas
+function drawParticles() {
+    particles.forEach((p) => {
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = `rgba(255, 255, 255, 1)`; // 🔥 Color blanco sólido
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        ctx.globalAlpha = 1;
+    });
+}
+
+
+
+let doors = [
+    { x: startX, y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game1", image: portalImages[0] },
+    { x: startX + (doorWidth + doorSpacing), y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game2", image: portalImages[1] },
+    { x: startX + (doorWidth + doorSpacing) * 2, y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game3", image: portalImages[2] },
+    { x: startX + (doorWidth + doorSpacing) * 3, y: canvas.height / 3, width: doorWidth, height: doorHeight, type: "game4", image: portalImages[3] }
+];
 
 let coin = { x: Math.random() * (canvas.width - 20), y: Math.random() * (canvas.height - 20), size: 15 };
 let collisionStartTime = null;
-
-// Cargar imágenes
-const backgroundImage = new Image();
-backgroundImage.src = "img/siso.webp";
-
-const portalImage = new Image();
-portalImage.src = "img/portal2.png";
-
 let hue = 0;
+
+window.onload = function() {
+    const rulesButtons = document.querySelectorAll(".rules-btn");
+    const canvas = document.getElementById("gameCanvas");
+    
+    if (!canvas) {
+        console.error("❌ ERROR: No se encontró el canvas.");
+        return;
+    }
+
+    const canvasRect = canvas.getBoundingClientRect();
+
+    // Coordenadas precisas de los portales en el canvas
+    const doors = [
+        { x: 0.111, y: 0.35 },  // Portal 1 - Esquiva
+        { x: 0.345, y: 0.35 }, // Portal 2 - Salta
+        { x: 0.58, y: 0.35 },  // Portal 3 - Escapa
+        { x: 0.82, y: 0.35 }  // Portal 4 - Apuesta
+    ];
+    
+    
+
+    rulesButtons.forEach((btn, index) => {
+        const portal = doors[index];
+        btn.style.position = "absolute";
+        btn.style.top = `${canvasRect.top + (canvasRect.height * portal.y) - 180}px`; // Ajuste fino hacia arriba
+        btn.style.left = `${canvasRect.left + (canvasRect.width * portal.x) - 195}px`; // Ajuste fino al centro
+        btn.style.zIndex = "9999"; // Asegura que estén sobre el canvas
+    });
+};
+
+// Función para alternar la visibilidad de las tarjetas de reglas
+function toggleRules(rulesId) {
+    let card = document.getElementById(rulesId);
+
+    if (!card) {
+        console.warn(`⚠️ No se encontró la tarjeta con ID: ${rulesId}`);
+        return;
+    }
+
+    // Alternar visibilidad de la tarjeta
+    let isVisible = card.classList.contains("active");
+
+    // Ocultar todas las tarjetas antes de abrir la nueva
+    document.querySelectorAll(".rules-card").forEach(card => card.classList.remove("active"));
+
+    // Mostrar solo si no estaba visible antes
+    if (!isVisible) {
+        card.classList.add("active");
+    }
+}
+
+// Hacer que la función sea accesible globalmente
+window.toggleRules = toggleRules;
 
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    drawParticles(); // 🔥 Dibujar partículas antes de los portales
 
     doors.forEach((door) => {
         ctx.save();
         ctx.shadowBlur = 20;
         ctx.shadowColor = `hsl(${hue}, 100%, 50%)`;
-        ctx.drawImage(portalImage, door.x, door.y, door.width, door.height);
+        ctx.drawImage(door.image, door.x, door.y, door.width, door.height);
         ctx.restore();
     });
 
@@ -84,10 +184,14 @@ function drawGame() {
     ctx.fill();
 
     ctx.fillStyle = "blue";
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = `hsl(${hue}, 100%, 50%)`;
     ctx.fillRect(player.x, player.y, player.width, player.height);
+    ctx.shadowBlur = 0;
 }
 
-function updatePortalGlow() {
+
+function updateGlow() {
     hue += 2;
     if (hue > 360) hue = 0;
 }
@@ -151,10 +255,13 @@ function handleKeyDown(event) {
 }
 
 setInterval(() => {
-    updatePortalGlow();
+    updateGlow();
+    createParticles(); // 🔥 Generar nuevas partículas en cada ciclo
+    updateParticles(); // 🔥 Mover y eliminar partículas viejas
     drawGame();
     checkCollisions();
 }, 100);
 
+
 document.addEventListener("keydown", handleKeyDown);
-backgroundImage.onload = drawGame;
+drawGame();

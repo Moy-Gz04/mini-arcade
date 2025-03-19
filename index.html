@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym Clicker - Mapa</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="header">Arcade Mini Games </div>
@@ -12,6 +13,98 @@
     <div class="main-container">
         <div class="game-container">
             <canvas id="gameCanvas"></canvas>
+
+            <div class="rules-container">
+                <!-- Juego 1 -->
+                <div class="rule-group">
+                    <button class="rules-btn glow" onclick="toggleRules('rules1')">
+                        <i class="fas fa-info-circle black-icon"></i>
+                    </button>
+                    <div id="rules1" class="rules-card">
+                        <h2>Reglas de Esquiva</h2>
+                        <p>Evita los obstáculos el mayor tiempo posible. Usa las flechas para moverte.</p>
+                    
+                        <!-- Contenedor de las teclas -->
+                        <div class="key-container">
+                            <div class="key">←</div>
+                            <p>Desplazarse a la izquierda</p>
+                    
+                            <div class="key">→</div>
+                            <p>Desplazarse a la derecha</p>
+                        </div>
+                    
+                        <p>Esquiva las mancuernas que caen desde la parte superior de la pantalla.</p>
+                    
+                    </div>
+                    </div>
+            
+                <!-- Juego 2 -->
+                <div class="rule-group">
+                    <button class="rules-btn glow" onclick="toggleRules('rules2')">
+                        <i class="fas fa-info-circle black-icon"></i>
+                    </button>
+                    <div id="rules2" class="rules-card">
+                        <h2>Reglas de Salta</h2>
+                        <p>Salta sobre los huecos y obstáculos para llegar lo más lejos posible.</p>
+                        
+                        <!-- Contenedor de las teclas -->
+                        <div class="key-container">
+                            <p>Presiona <b>ESPACIO</b> para saltar</p>
+                        
+                            <div class="key key-tap">
+                                <i class="fas fa-hand-pointer"></i>
+                            </div>
+                        </div>
+                        
+                        <p>El objetivo es pasar por en medio de los obstáculos y recorrer la mayor distancia posible para posicionarse en un
+                            buen lugar del <b>ranking general</b>.</p>
+                    </div>
+                    </div>
+            
+                <!-- Juego 3 -->
+                <div class="rule-group">
+                    <button class="rules-btn glow" onclick="toggleRules('rules3')">
+                        <i class="fas fa-info-circle black-icon"></i>
+                    </button>
+                    <div id="rules3" class="rules-card">
+                        <h2>Reglas de Escapa</h2>
+                        
+                        <div class="key-container">
+                            <div class="key-row">
+                                <div class="key">↑</div>
+                            </div>
+                            <div class="key-row">
+                                <div class="key">←</div>
+                                <div class="key">↓</div>
+                                <div class="key">→</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Explicación del objetivo del juego -->
+                        <p>Usa las <b>flechas de dirección</b> para moverte en la cuadrícula.</p>
+                        <p>Tu objetivo es llegar al <b>cuadro iluminado de blanco</b> <b>en el menor tiempo posible</b>.
+
+                    </div>
+                </div>
+            
+                <!-- Juego 4 -->
+                <div class="rule-group">
+                    <button class="rules-btn glow" onclick="toggleRules('rules4')">
+                        <i class="fas fa-info-circle black-icon"></i>
+                    </button>
+                    <div id="rules4" class="rules-card">
+                        <h2>Reglas de Apuesta</h2>
+                        <p>Apuesta tus monedas y prueba tu suerte en la ruleta.</p>
+                        <p>Usa las monedas obtenidas para comprar <b>skins exclusivas</b> y mejoras.</p>
+                        <p class="coming-soon">🔥 Próximamente 🔥 ¡Podras usar tus monedas para comprar skins!</p>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            
             <div id="transitionMessage" class="transition-message"></div>
         </div>
         <div class="sidebar">
@@ -20,6 +113,8 @@
             <button class="sidebar-button" id="skinsButton"> Mis Skins</button>
         </div>
     </div>
+
+    
 
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/firebaseConfig.js"></script>

@@ -175,3 +175,206 @@ canvas {
     display: none;
     text-shadow: 0 0 10px cyan;
 }
+
+/* Contenedor general de los iconos */
+.rules-container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    pointer-events: none;
+}
+
+/* Botón de información */
+.rules-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: glowAnimation 0.5s infinite alternate;
+    z-index: 9999;
+    pointer-events: all;
+    transition: transform 0.2s ease;
+}
+
+/* Efecto de brillo */
+.rules-btn:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+}
+
+/* Ícono negro */
+.black-icon {
+    font-size: 40px;
+    color: black;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Animación de brillo */
+@keyframes glowAnimation {
+    0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+    50% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); }
+}
+
+/* Tarjetas de reglas */
+.rules-card {
+    display: none;
+    position: absolute;
+    width: 250px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 10000;
+}
+
+/* Muestra la tarjeta cuando está activa */
+.rules-card.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(10px);
+}
+
+/* Botón para cerrar */
+.close-card {
+    background: red;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.close-card:hover {
+    background: darkred;
+}
+
+/* Contenedor general de los iconos */
+.rules-container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    pointer-events: none;
+    top: 0; /* Se mantiene en la parte superior */
+}
+
+/* Botón de información */
+.rules-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: glowAnimation 0.5s infinite alternate;
+    z-index: 9999;
+    pointer-events: all;
+    transition: transform 0.2s ease;
+    margin-top: -40px;
+    margin-left: -28px;
+}
+
+/* Efecto de brillo */
+.rules-btn:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+}
+
+/* Ícono negro */
+.black-icon {
+    font-size: 40px;
+    color: black;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Animación de brillo */
+@keyframes glowAnimation {
+    0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+    50% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); }
+}
+
+/* Contenedor general de las teclas */
+.key-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Grupo de teclas */
+.key-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Diseño de las teclas */
+.key {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #222;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 0 #444, 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fff;
+}
+
+/* Efecto de presión cuando se presiona */
+.key:active {
+    box-shadow: 0 2px 0 #444;
+    transform: translateY(2px);
+}
+
+/* Sección destacada en rojo */
+.coming-soon {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    border: 2px solid red;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+/* Ajuste específico para la tarjeta "Reglas de Apuesta" */
+.rules-card#rules4 {
+    left: -30px; /* Mueve la tarjeta a la izquierda pero manteniéndola visible */
+    opacity: 0; /* Oculta la tarjeta inicialmente */
+    transition: opacity 0.3s ease, left 0.3s ease; /* Animación suave */
+}
+
+/* Cuando la tarjeta está activa, se muestra correctamente */
+.rules-card#rules4.active {
+    opacity: 1;
+    left: 10px; /* Se mueve ligeramente a la izquierda, pero sigue en pantalla */
+}
+
+
+
+
+
