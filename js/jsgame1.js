@@ -19,7 +19,24 @@ bgImage.src = "img/fondo1.jpg";
 const objectImage = new Image();
 objectImage.src = "img/mancuerna.png";
 
-let player = { x: canvas.width / 2 - 20, y: canvas.height - 50, width: 40, height: 40, speed: 15 };
+// 🔥 Cargar la imagen del personaje
+const playerImage = new Image();
+playerImage.src = "img/personaje.png";
+
+playerImage.onload = () => {
+    console.log("✅ Imagen del personaje cargada correctamente.");
+};
+
+
+// 📌 Datos del jugador con la imagen
+let player = { 
+    x: canvas.width / 2 - 20, 
+    y: canvas.height - 70, 
+    width: 80,  // Ajusta el tamaño del personaje si es necesario
+    height: 80, 
+    speed: 15 
+};
+
 let objects = [];
 let score = 0;
 let gameOver = false;
@@ -75,15 +92,34 @@ function startCountdown() {
     }, 1000);
 }
 
+// 📌 Modificar la función para dibujar el personaje
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "blue";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+
+    // 📌 Dibujar el personaje en lugar del cubo azul
+    if (playerImage.complete) {
+        ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+    } else {
+        console.warn("⚠️ La imagen del personaje aún no se ha cargado.");
+    }
+
+    // 📌 Dibujar los objetos (mancuernas)
     objects.forEach((obj) => {
         ctx.drawImage(objectImage, obj.x, obj.y, obj.size, obj.size);
     });
 }
+
+// 📌 Agregar la funcionalidad de movimiento con las teclas
+document.addEventListener("keydown", (event) => {
+    if (!gameStarted) return;
+    if (event.key === "ArrowLeft" && player.x > 0) {
+        player.x -= player.speed;
+    } else if (event.key === "ArrowRight" && player.x + player.width < canvas.width) {
+        player.x += player.speed;
+    }
+    drawGame();
+});
 
 function spawnObjects() {
     objects = [];

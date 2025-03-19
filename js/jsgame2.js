@@ -6,11 +6,15 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 500;
 
+// 🔹 Cargar la imagen del personaje
+const playerImage = new Image();
+playerImage.src = "img/personaje.png";
+
 let player = {
     x: 100,
     y: canvas.height / 2,
-    width: 25,
-    height: 25,
+    width: 40,
+    height: 50,
     velocityY: 5,
     gravity: 0.15,
     jump: -4.5,
@@ -89,11 +93,16 @@ function drawBackground() {
     ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
 }
 
-// 🔹 Dibujar el jugador
+
+// 🔹 Dibujar el jugador con una imagen en lugar del rectángulo amarillo
 function drawPlayer() {
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+    if (playerImage.complete) {
+        ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+    } else {
+        console.warn("⚠️ La imagen del personaje aún no se ha cargado.");
+    }
 }
+
 
 // 🔹 Actualizar el jugador
 function updatePlayer() {

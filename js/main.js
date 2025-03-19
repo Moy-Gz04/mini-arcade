@@ -37,9 +37,18 @@ function actualizarMonedas(nuevaCantidad) {
 
 obtenerMonedas(); // 🔥 Cargar monedas al iniciar
 
-// Datos del jugador
-let player = { x: canvas.width / 2 - 20, y: canvas.height - 100, width: 40, height: 40, speed: 5 };
+// 🔥 Cargar la imagen del personaje
+const playerImage = new Image();
+playerImage.src = "img/personaje.png";
 
+// 📌 Datos del jugador
+let player = { 
+    x: canvas.width / 2 - 20, 
+    y: canvas.height - 100, 
+    width: 120,  // Ajusta el tamaño si es necesario
+    height: 120, 
+    speed: 6 
+};
 // Parámetros de los portales
 const doorWidth = 150;
 const doorHeight = 150;
@@ -166,6 +175,7 @@ window.toggleRules = toggleRules;
 let coinOpacity = 1;
 let coinOpacityDirection = 1; // Dirección del cambio de opacidad
 
+// 📌 Modificar la función para dibujar el personaje en lugar del cubo
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
@@ -181,21 +191,21 @@ function drawGame() {
         ctx.restore();
     });
 
-    // 📌 Aplicar efecto de parpadeo
-    ctx.globalAlpha = coinOpacity; // Aplicar opacidad
-    ctx.font = "28px Arial"; // Tamaño y fuente del emoji
+    // 📌 Dibujar la moneda con efecto de parpadeo
+    ctx.globalAlpha = coinOpacity; 
+    ctx.font = "28px Arial"; 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("🪙", coin.x, coin.y);
-    ctx.globalAlpha = 1; // Restaurar opacidad normal para otros elementos
+    ctx.globalAlpha = 1;
 
-    ctx.fillStyle = "blue";
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = `hsl(${hue}, 100%, 50%)`;
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-    ctx.shadowBlur = 0;
+    // 📌 Dibujar el personaje en lugar del cubo azul
+    if (playerImage.complete) {
+        ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+    } else {
+        console.warn("⚠️ La imagen del personaje aún no se ha cargado.");
+    }
 }
-
 // 🔥 Función para actualizar la opacidad y hacer el efecto de parpadeo
 function updateCoinOpacity() {
     coinOpacity += coinOpacityDirection * 0.02; // Cambia la opacidad gradualmente
@@ -295,6 +305,20 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "flex";
         sessionStorage.setItem("visited", "true");
     }
+});
+
+// 📌 Agregar la funcionalidad de movimiento con las teclas
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowUp") {
+        player.y -= player.speed;
+    } else if (event.key === "ArrowDown") {
+        player.y += player.speed;
+    } else if (event.key === "ArrowLeft") {
+        player.x -= player.speed;
+    } else if (event.key === "ArrowRight") {
+        player.x += player.speed;
+    }
+    drawGame();
 });
 
 // 📌 Función para cerrar el modal manualmente

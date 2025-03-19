@@ -44,7 +44,11 @@ const maze = [
     [1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0],
     [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0]
   ];
-  
+
+  // 🔹 Cargar la imagen del personaje
+const playerImage = new Image();
+playerImage.src = "img/personaje.png";
+
 // Personaje
 const player = {
   x: 0,
@@ -193,6 +197,7 @@ function drawMaze() {
 }
 
 // Dibujar el personaje con iluminación
+// 🔹 Dibujar el personaje con la imagen en lugar del recuadro rojo
 function drawPlayer() {
   const lightRadius = cellSize * 2;
   const gradient = ctx.createRadialGradient(
@@ -209,14 +214,20 @@ function drawPlayer() {
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(255, 0, 0, 0)";
-  ctx.fillRect(
-    player.x * cellSize + (cellSize - player.size) / 2,
-    player.y * cellSize + (cellSize - player.size) / 2,
-    player.size,
-    player.size
-  );
+  // 🔹 Dibujar el personaje con la imagen en lugar del rectángulo rojo
+  if (playerImage.complete) {
+    ctx.drawImage(
+      playerImage,
+      player.x * cellSize + (cellSize - player.size) / 2,
+      player.y * cellSize + (cellSize - player.size) / 2,
+      player.size,
+      player.size
+    );
+  } else {
+    console.warn("⚠️ La imagen del personaje aún no se ha cargado.");
+  }
 }
+
 
 // Dibujar todo el juego
 function drawGame() {
