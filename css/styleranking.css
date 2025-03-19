@@ -1,6 +1,6 @@
 /* General */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive; /* 🔥 Fuente retro usada en el resto del sitio */
     text-align: center;
     background: #111;
     color: white;
@@ -24,22 +24,26 @@ body {
 .title {
     font-size: 30px;
     margin-bottom: 20px;
+    color: #00ffff; /* Color cian para resaltar */
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00cccc, 0 0 30px #009999; /* Efecto de neón */
 }
 
 /* Contenedor de las cards */
 .card-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* 🔥 No permite que se vayan a otra línea */
     gap: 20px;
     padding: 20px;
     width: 80%;
+    margin: 0 auto; /* Centra el contenedor */
 }
+
+
 
 /* Estilos para cada card */
 .card {
-    flex: 1;
-    max-width: 30%;
+    flex: 0 0 30%; /* 🔥 Cada card ocupa el 30% del ancho */
     background: #222;
     padding: 20px;
     border-radius: 10px;
@@ -47,6 +51,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     transition: 0.3s;
 }
+
+
 
 .card:hover {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
@@ -62,13 +68,17 @@ body {
 }
 
 .card th, .card td {
+    font-family: Arial, sans-serif; /* 🔥 Fuente simple y clara */
+    font-size: 14px;                /* Ajusta el tamaño según prefieras */
     padding: 10px;
     border-bottom: 1px solid #555;
 }
 
+
 .card th {
     background: #444;
-    color: cyan;
+    color: #00ffff; /* Combina con el resto del sitio */
+    text-shadow: 0 0 5px #00cccc;
 }
 
 .card td {
@@ -86,8 +96,9 @@ body {
 /* 🎨 Estilos del botón con efectos */
 button {
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 16px; /* Ajuste para que no se vea tan grande con la fuente Press Start 2P */
     font-weight: bold;
+    font-family: 'Press Start 2P', cursive; /* Asegura la misma fuente en el botón */
     background: linear-gradient(90deg, #00f7ff, #0ff);
     color: black;
     border: none;
@@ -128,3 +139,43 @@ button::before {
 button:hover::before {
     opacity: 1;
 }
+
+/* Estilos para la tabla de ranking dentro de las cards */
+.card table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Contenedor del scroll en la tabla */
+.card .table-container {
+    max-height: 330px; /* Ajustar según el diseño */
+    overflow-y: auto;  /* Activa el scroll cuando hay más de 9 registros */
+}
+
+/* Estilo para las barras de desplazamiento */
+.card .table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card .table-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.6);
+    border-radius: 4px;
+}
+
+.card th, .card td {
+    padding: 10px;
+    border-bottom: 1px solid #555;
+}
+
+.card th {
+    background: #444;
+    color: cyan;
+}
+
+.card td {
+    background: #555;
+}
+

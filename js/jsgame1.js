@@ -108,6 +108,7 @@ function cerrarModal() {
     nameModal.style.display = "none";
 }
 
+
 // 📌 Guardar el nombre y registrar el puntaje
 function guardarNombre() {
     let nombre = playerNameInput.value.trim(); // Quita espacios innecesarios
@@ -119,8 +120,9 @@ function guardarNombre() {
 
     let puntaje = score > 0 ? score : 0; // Asegurar que el puntaje tiene un valor válido
 
-    registrarPuntaje(nombre, puntaje);
+    registrarPuntaje(nombre, puntaje); // Llamar a la función correctamente
 }
+
 
 // 📌 Guardar puntaje en Firebase y redirigir de inmediato al ranking
 function registrarPuntaje(nombreUsuario, puntaje) {
@@ -133,13 +135,16 @@ function registrarPuntaje(nombreUsuario, puntaje) {
         .then(() => {
             console.log("✅ Puntaje registrado en Firebase con éxito.");
             cerrarModal(); // 🔹 Cerrar el modal inmediatamente
-            window.location.href = "ranking.html"; // 🔹 Redirigir directamente al ranking
+            setTimeout(() => {
+                window.location.href = "index.html"; // 🔹 Redirigir después de 1 segundo
+            }, 1000);
         })
         .catch((error) => {
             console.error("❌ ERROR al registrar el puntaje:", error);
             alert("❌ Error al guardar el puntaje. Intenta de nuevo.");
         });
 }
+
 
 // 📌 Actualizar el juego y detectar colisiones
 function updateGame() {
@@ -176,7 +181,7 @@ function updateGame() {
 // 🔹 Cerrar la ventana modal y redirigir al ranking
 function closeScoreModal() {
     document.getElementById("scoreModal").style.display = "none";
-    window.location.href = "ranking.html";
+    window.location.href = "index.html";
 }
 
 function gameLoop() {

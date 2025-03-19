@@ -162,6 +162,9 @@ function toggleRules(rulesId) {
 
 // Hacer que la función sea accesible globalmente
 window.toggleRules = toggleRules;
+// 🔥 Variable de opacidad para el efecto de parpadeo de la moneda
+let coinOpacity = 1;
+let coinOpacityDirection = 1; // Dirección del cambio de opacidad
 
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -178,10 +181,13 @@ function drawGame() {
         ctx.restore();
     });
 
-    ctx.fillStyle = "gold";
-    ctx.beginPath();
-    ctx.arc(coin.x, coin.y, coin.size, 0, Math.PI * 2);
-    ctx.fill();
+    // 📌 Aplicar efecto de parpadeo
+    ctx.globalAlpha = coinOpacity; // Aplicar opacidad
+    ctx.font = "28px Arial"; // Tamaño y fuente del emoji
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("🪙", coin.x, coin.y);
+    ctx.globalAlpha = 1; // Restaurar opacidad normal para otros elementos
 
     ctx.fillStyle = "blue";
     ctx.shadowBlur = 20;
@@ -190,6 +196,15 @@ function drawGame() {
     ctx.shadowBlur = 0;
 }
 
+// 🔥 Función para actualizar la opacidad y hacer el efecto de parpadeo
+function updateCoinOpacity() {
+    coinOpacity += coinOpacityDirection * 0.02; // Cambia la opacidad gradualmente
+    if (coinOpacity >= 1) {
+        coinOpacityDirection = -1; // Reducir opacidad
+    } else if (coinOpacity <= 0.5) {
+        coinOpacityDirection = 1; // Aumentar opacidad
+    }
+}
 
 function updateGlow() {
     hue += 2;
@@ -254,13 +269,42 @@ function handleKeyDown(event) {
     drawGame();
 }
 
+// 🔄 Integrar la actualización de opacidad en el loop principal
 setInterval(() => {
     updateGlow();
     createParticles(); // 🔥 Generar nuevas partículas en cada ciclo
     updateParticles(); // 🔥 Mover y eliminar partículas viejas
+    updateCoinOpacity(); // 🔥 Actualizar el parpadeo de la moneda
     drawGame();
     checkCollisions();
 }, 100);
+
+document.getElementById("scoreboardButton").addEventListener("click", function () {
+    window.location.href = "ranking.html";
+});
+
+// 📌 Verifica si el usuario viene de otra página
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("instructionsModal");
+
+    // Si el usuario ya ha visitado la página en esta sesión, no mostramos el modal
+    if (sessionStorage.getItem("visited")) {
+        modal.style.display = "none";
+    } else {
+        // Si es la primera visita, mostramos el modal y marcamos la sesión como visitada
+        modal.style.display = "flex";
+        sessionStorage.setItem("visited", "true");
+    }
+});
+
+// 📌 Función para cerrar el modal manualmente
+function closeInstructions() {
+    document.getElementById("instructionsModal").style.display = "none";
+}
+
+// Hacer accesible la función globalmente
+window.closeInstructions = closeInstructions;
+
 
 
 document.addEventListener("keydown", handleKeyDown);
