@@ -321,6 +321,10 @@ document.addEventListener("keydown", (event) => {
     drawGame();
 });
 
+// 📌 Ejecutar la función al cargar la página
+document.addEventListener("DOMContentLoaded", bloquearMovil);
+
+
 // 📌 Función para cerrar el modal manualmente
 function closeInstructions() {
     document.getElementById("instructionsModal").style.display = "none";
@@ -328,8 +332,6 @@ function closeInstructions() {
 
 // Hacer accesible la función globalmente
 window.closeInstructions = closeInstructions;
-
-
 
 document.addEventListener("keydown", handleKeyDown);
 drawGame();
